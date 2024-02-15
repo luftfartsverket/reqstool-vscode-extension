@@ -1,3 +1,10 @@
+
+[![Commit Activity](https://img.shields.io/github/commit-activity/m/Luftfartsverket/reqstool-vscode-extension?label=commits&style=for-the-badge)](https://github.com/Luftfartsverket/reqstool-vscode-extension/pulse)
+[![GitHub Issues](https://img.shields.io/github/issues/Luftfartsverket/reqstool-vscode-extension?style=for-the-badge&logo=github)](https://github.com/Luftfartsverket/reqstool-vscode-extension/issues)
+[![License](https://img.shields.io/github/license/Luftfartsverket/reqstool-vscode-extension?style=for-the-badge&logo=opensourceinitiative)](https://opensource.org/license/mit/)
+[![Build](https://img.shields.io/github/actions/workflow/status/Luftfartsverket/reqstool-vscode-extension/build.yml?style=for-the-badge&logo=github)](https://github.com/Luftfartsverket/reqstool-vscode-extension/actions/workflows/build.yml)
+[![Static Badge](https://img.shields.io/badge/Documentation-blue?style=for-the-badge&link=docs)](https://luftfartsverket.github.io/reqstool-vscode-extension/)
+
 # Reqstool augmentations for Visual Studio Code
 
 This extension works with [reqstool](https://github.com/Luftfartsverket/reqstool-client)  to display requirements, software verification cases and manual verification cases upon hover of an annotation.
