@@ -1,6 +1,8 @@
-# Reqstool augmentations for Visual Studio Code
+# Reqstool extension for Visual Studio Code
 
-This extension works with [reqstool](https://github.com/Luftfartsverket/reqstool-client)  to display requirements, software verification cases and manual verification cases upon hover of an annotation.
+This extension provides various features for use  with [reqstool](https://github.com/Luftfartsverket/reqstool-client) such as:
+
+* Display information upon hover over an annotation about requirements, software verification cases, and manual verification cases 
 
 ## Prerequisites
 
@@ -33,3 +35,9 @@ The directory set in `reqstool.entryPointDir` is watched for changes. The extens
 * After cloning, run: `npm install`
 * To debug, run `npm run watch` and press `F5`. In the window that appears, open a project with annotations an a supported language.
 * Build with `npm run build`
+
+## Future ideas
+
+* Auto-detect reqstool files in projects
+* Reqstool context aware editor when editing yml files (requirements, software verification cases, manual verification cases, and reqstool config)
+* Use Outline, e.g. to list all requirements in a file
