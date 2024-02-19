@@ -2,7 +2,7 @@
     "name": "reqstool-vscode-extension",
     "displayName": "Reqstool",
     "description": "Provides Reqstool support",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/Luftfartsverket/reqstool-vscode-extension"
@@ -35,7 +35,7 @@
                         "description": "Reqstool: Set entry point"
                     }
                 }
-            },
+            }
         ]
     },
     "scripts": {
