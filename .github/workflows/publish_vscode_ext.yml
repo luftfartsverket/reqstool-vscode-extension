@@ -15,15 +15,15 @@ jobs:
   publish-vscode-extension:
     needs: 
       - build        
-    #   - check-release
+      - check-release
 
     runs-on: ubuntu-latest
     steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          name: dist
-          path: .
+          node-version: 20
+      - run: npm ci          
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
         with:
