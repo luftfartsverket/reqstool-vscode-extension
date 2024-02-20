@@ -1,8 +1,8 @@
 {
     "name": "reqstool-vscode-extension",
-    "displayName": "reqstool-vscode-extension",
-    "description": "Show a tooltip when hovering a requirement",
-    "version": "0.0.3",
+    "displayName": "Reqstool",
+    "description": "Provides Reqstool support",
+    "version": "0.1.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/Luftfartsverket/reqstool-vscode-extension"
@@ -31,6 +31,7 @@
                 "properties": {
                     "reqstool.entryPointDir": {
                         "type": "string",
+                        "scope": "resource",
                         "description": "Reqstool: Set entry point"
                     }
                 }
