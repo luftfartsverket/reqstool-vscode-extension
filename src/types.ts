@@ -13,7 +13,7 @@ export type Requirement = {
     description: string
     rationale: string
     revision: string
-    category: string[]
+    categories: string[]
     references: string[]
 }
 

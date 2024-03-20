@@ -26,7 +26,7 @@ export default class Requirements extends Annotation {
     }
 
     protected markdown(data: Requirement, relation: Relation) {
-        const { id, title, significance, revision, description, rationale, category } = data
+        const { id, title, significance, revision, description, rationale, categories } = data
         const lines = [
             `### ${title}`,
             `\`${id}\` \`${significance}\` \`${revision}\``,
@@ -35,7 +35,7 @@ export default class Requirements extends Annotation {
             '---',
             `${rationale}`,
             '---',
-            category.join(', '),
+            categories.join(', '),
             '---',
             relation.svcsFromReq[id].map((svc) => this.linkUrnMarkdown(svc, AnnotationType.svc)).join(', '),
         ]
@@ -45,8 +45,8 @@ export default class Requirements extends Annotation {
     }
 
     protected html(data: Requirement, relation: Relation) {
-        const { id, title, significance, revision, description, rationale, category } = data
-        const categories = category.map((cat) => /*html*/ `<li>${cat}</li>`).join('\n')
+        const { id, title, significance, revision, description, rationale, categories } = data
+        const categoryItems = categories.map((cat) => /*html*/ `<li>${cat}</li>`).join('\n')
         const linked = relation
             .getSvcsFromReq(id)
             .map((svc) => /*html*/ `<li>${this.linkUrnHtml(svc, AnnotationType.svc)}</li>`)
@@ -64,7 +64,7 @@ export default class Requirements extends Annotation {
                 <h3>Rationale</h3>
                 <p>${rationale}</p>
                 <h3>Categories</h3>
-                <ul>${categories}</ul>
+                <ul>${categoryItems}</ul>
                 <h3>Related SVCs</h3>
                 <ul>${linked}</ul>
         `)
