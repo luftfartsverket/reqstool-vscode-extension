@@ -5,7 +5,7 @@
 
 # Reqstool extension for Visual Studio Code
 
-This extension provides various features for use  with [reqstool](https://github.com/Luftfartsverket/reqstool-client) such as:
+This extension provides various features for use with [reqstool](https://github.com/Luftfartsverket/reqstool-client) such as:
 
 * Display information upon hover over an annotation about requirements, software verification cases, and manual verification cases 
 
@@ -15,20 +15,12 @@ This extension provides various features for use  with [reqstool](https://github
 
 ## Usage
 
-1. Open the workspace settings and set the `reqstool.entryPointDir` property to the directory containing to your requirements etc.  
-  This is the same path you would give *reqstool* directly when running it standalone.
-
-1. Reload VSCode.
-
-2. Open a file from a [supported language](#supported-languages) and the extension will load.
-
-## Commands
-
-* `Update`: reruns *reqstool*
+Open a workspace that has requirements in the format specified by `reqstool`. The extensions should initialize automatically. 
+There is an output channel that will show when a workspace is initialized. 
 
 ## File watcher
 
-The directory set in `reqstool.entryPointDir` is watched for changes. The extension will rerun *reqstool* when a change is detected.
+If a directory with requirements files is found, it's watched for changes. The extension will rerun *reqstool* when a change is detected.
 
 ## Supported languages
 
