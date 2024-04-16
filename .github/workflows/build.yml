@@ -1,7 +1,7 @@
 name: Build VS Code extension
 
 on:
-  workflow_call: 
+  workflow_call:
   workflow_dispatch:
   push:
   pull_request:
@@ -24,13 +24,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: |
-          npm ci
-          npm run test-with-report
-          npm run build
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run headless test
+        uses: coactions/setup-xvfb@v1
+        with:
+          run: npm run test-with-report
+
+      - name: Build project
+        run: npm run build
+
       # Upload artifacts for later use
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: '*.vsix'
+          path: "*.vsix"
