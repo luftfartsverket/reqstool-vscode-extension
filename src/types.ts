@@ -1,38 +1,6 @@
 // Copyright © LFV
 
-import { AnnotationType } from './annotations/AnnotationType'
-
-/**
- * This definition is simplified. Some of these are enums but keeping
- * track of that is unnecessary when only displaying the data.
- */
-export type Requirement = {
-    id: string
-    title: string
-    significance: string
-    description: string
-    rationale: string
-    revision: string
-    categories: string[]
-    references: string[]
-}
-
-export type SoftwareVerificationCase = {
-    id: string
-    title: string
-    description: string | null
-    verification: string
-    instructions: string | null
-    revision: string
-    requirement_ids: string[]
-}
-
-export type ManualVerificationResult = {
-    id: string
-    comment: string
-    passed: boolean
-    svc_ids: string[]
-}
+import { AnnotationType } from './enums/AnnotationType'
 
 /**
  * This definition is simplified. It only contains the properties
@@ -52,23 +20,71 @@ export type RequirementsToolOutput = {
     mvrs_from_svc: StringArrayMap
 }
 
-export type RequirementsMap = {
+/**
+ * This definition is simplified. Some of these are enums but keeping
+ * track of that is unnecessary when only displaying the data.
+ */
+type Requirement = {
+    id: string
+    title: string
+    significance: string
+    description: string
+    rationale: string
+    revision: Revision
+    categories: string[]
+    references: {
+        requirement_ids: string[]
+    }
+}
+
+type SoftwareVerificationCase = {
+    id: string
+    title: string
+    description: string | null
+    verification: string
+    instructions: string | null
+    revision: Revision
+    requirement_ids: string[]
+}
+
+type ManualVerificationResult = {
+    id: string
+    comment: string
+    passed: boolean
+    svc_ids: string[]
+}
+
+export type Revision = {
+    major: number
+    minor: number
+    patch: number
+}
+
+// Can't be an actual Map without modifying the JSON parsing.
+type RequirementsMap = {
     [key: string]: Requirement
 }
 
-export type SVCsMap = {
+type SVCsMap = {
     [key: string]: SoftwareVerificationCase
 }
 
-export type MVRsMap = {
+type MVRsMap = {
     [key: string]: ManualVerificationResult
 }
 
-export type StringArrayMap = {
+type StringArrayMap = {
     [key: string]: string[]
 }
 
 export type HoverClickHandlerArgs = {
     urn: string
-    annotationType: AnnotationType
+    type: AnnotationType
+    workspaceKey: string
+}
+
+export type AnnotationPosition = {
+    start: number
+    end: number
+    type?: AnnotationType
 }
