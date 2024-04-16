@@ -25,6 +25,7 @@
         "pretest": "npm run compile && npm run lint",
         "lint": "eslint src --ext ts",
         "test": "vscode-test",
+        "test-with-report": "vscode-test",
         "clean": "rimraf out",
         "build": "rimraf out && vsce package"
     },
@@ -38,6 +39,7 @@
         "@vscode/test-electron": "2.3.9",
         "@vscode/vsce": "2.25.0",
         "eslint": "8.57.0",
+        "mocha-junit-reporter": "^2.2.1",
         "rimraf": "5.0.5",
         "typescript": "5.4.5"
     },
