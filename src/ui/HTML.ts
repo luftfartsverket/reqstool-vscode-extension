@@ -2,13 +2,13 @@
 
 import { RequirementsToolOutput } from '../types'
 import { AnnotationType } from '../enums/AnnotationType'
-import { stringifyRevision } from '../util'
+import { ensureStringArray, stringifyRevision } from '../util'
 
 export namespace HTML {
     export function fromRequirement(urn: string, reqstoolData: RequirementsToolOutput, workspaceKey: string) {
         const { id, title, significance, revision, description, rationale, categories } = reqstoolData.requirements[urn]
         const categoryItems = categories.map((cat) => /*html*/ `<li>${cat}</li>`).join('\n')
-        const linked = reqstoolData.svcs_from_req[id]
+        const linked = ensureStringArray(reqstoolData.svcs_from_req?.[id])
             .map((svc) => /*html*/ `<li>${link(svc, AnnotationType.svc, workspaceKey)}</li>`)
             .join('\n')
         return wrapInBaseTemplate(/*html*/ `
@@ -35,7 +35,7 @@ export namespace HTML {
         const reqIds = requirement_ids
             .map((req) => /*html*/ `<li>${link(req, AnnotationType.requirement, workspaceKey)}</li>`)
             .join('\n')
-        const relatedMvrs = reqstoolData.mvrs_from_svc[id]
+        const relatedMvrs = ensureStringArray(reqstoolData.mvrs_from_svc?.[id])
             .map((mvr) => /*html*/ `<li>${link(mvr, AnnotationType.mvr, workspaceKey)}</li>`)
             .join('\n')
 

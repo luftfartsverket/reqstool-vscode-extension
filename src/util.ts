@@ -30,3 +30,15 @@ export function setupFileWatcher(reqsDir: URI, handleChange: (uri: URI) => void)
 export function stringifyRevision(revision: Revision) {
     return `${revision.major}.${revision.minor}.${revision.patch}`
 }
+
+/**
+ * Makes sure a object is an actual string array
+ * @param possibleArray The object that may be a string array
+ * @returns The array as is, or an empty array
+ */
+export function ensureStringArray(possibleArray: string[] | undefined) {
+    if (Array.isArray(possibleArray) && possibleArray.every((item) => typeof item === 'string')) {
+        return possibleArray
+    }
+    return []
+}

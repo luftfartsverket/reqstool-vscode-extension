@@ -3,11 +3,14 @@
 import { MarkdownString } from 'vscode'
 import { AnnotationType } from '../enums/AnnotationType'
 import { HoverClickHandlerArgs, RequirementsToolOutput } from '../types'
-import { stringifyRevision } from '../util'
+import { ensureStringArray, stringifyRevision } from '../util'
 
 export namespace Markdown {
     export function fromRequirement(urn: string, reqstoolData: RequirementsToolOutput, workspaceKey: string) {
         const { id, title, significance, revision, description, rationale, categories } = reqstoolData.requirements[urn]
+        const svcLinks = ensureStringArray(reqstoolData.svcs_from_req?.[urn]).map((svc) =>
+            link(svc, AnnotationType.svc, workspaceKey)
+        )
         const lines = [
             `### ${title}`,
             `\`${id}\` \`${significance}\` \`${stringifyRevision(revision)}\``,
@@ -18,8 +21,7 @@ export namespace Markdown {
             '---',
             categories.join(', '),
             '---',
-
-            reqstoolData.svcs_from_req[urn].map((svc) => link(svc, AnnotationType.svc, workspaceKey)).join(', '),
+            svcLinks.join(', '),
         ]
         const markdownText = new MarkdownString(lines.join('\n\n'))
         markdownText.isTrusted = true
@@ -28,6 +30,9 @@ export namespace Markdown {
 
     export function fromSvc(urn: string, reqstoolData: RequirementsToolOutput, workspaceKey: string) {
         const { id, title, description, verification, instructions, revision, requirement_ids } = reqstoolData.svcs[urn]
+        const mvrLinks = ensureStringArray(reqstoolData.mvrs_from_svc?.[urn]).map((svc) =>
+            link(svc, AnnotationType.svc, workspaceKey)
+        )
         const lines = [
             `### ${title}`,
             `\`${id}\` \`${verification}\` \`${stringifyRevision(revision)}\``,
@@ -38,7 +43,7 @@ export namespace Markdown {
             '---',
             requirement_ids.map((req) => link(req, AnnotationType.requirement, workspaceKey)).join(', '),
             '---',
-            reqstoolData.mvrs_from_svc[urn].map((svc) => link(svc, AnnotationType.svc, workspaceKey)).join(', '),
+            mvrLinks.join(', '),
         ]
         const markdownText = new MarkdownString(lines.join('\n\n'))
         markdownText.isTrusted = true

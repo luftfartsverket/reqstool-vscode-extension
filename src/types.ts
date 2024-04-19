@@ -13,11 +13,11 @@ export type RequirementsToolOutput = {
     requirements: RequirementsMap
     svcs: SVCsMap
     mvrs: MVRsMap
-    reqs_from_urn: StringArrayMap
-    svcs_from_urn: StringArrayMap
-    svcs_from_req: StringArrayMap
-    mvrs_from_urn: StringArrayMap
-    mvrs_from_svc: StringArrayMap
+    reqs_from_urn?: StringArrayMap
+    svcs_from_urn?: StringArrayMap
+    svcs_from_req?: StringArrayMap
+    mvrs_from_urn?: StringArrayMap
+    mvrs_from_svc?: StringArrayMap
 }
 
 /**
