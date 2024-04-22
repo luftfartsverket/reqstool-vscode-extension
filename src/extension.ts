@@ -10,6 +10,7 @@ import { AnnotationType } from './enums/AnnotationType'
 import { languageAnnotationMap } from './languageAnnotationMap'
 import { registerHoverProvider } from './hoverProvider'
 import { HTML } from './ui/HTML'
+import { registerSnippets } from './snippets'
 
 const webView = new WebviewProvider(handleWebViewMessage)
 
@@ -27,6 +28,9 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.commands.registerCommand('reqstool-vscode-extension.hoverClickHandler', handleHoverClick)
     )
+
+    // Register autocomplete snippets
+    context.subscriptions.push(registerSnippets())
 
     // Setup all open workspaces on extension lauch
     scanWorkspaceFolders()
