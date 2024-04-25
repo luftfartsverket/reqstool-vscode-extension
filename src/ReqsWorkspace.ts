@@ -3,7 +3,7 @@
 import * as vscode from 'vscode'
 import { AnnotationType } from './enums/AnnotationType'
 import { expandId, setupFileWatcher } from './util'
-import { RequirementsToolOutput } from './types'
+import { AnnotationId, RequirementsToolOutput } from './types'
 import { keyFrom } from './WorkspaceManager'
 import { Markdown } from './ui/Markdown'
 import { HTML } from './ui/HTML'
@@ -47,34 +47,53 @@ export class ReqsWorkspace {
         return true
     }
 
-    getMarkdown(urn: string, type: AnnotationType) {
-        urn = expandId(urn, this.reqstoolData.initial_model_urn)
+    getMarkdown(id: AnnotationId) {
+        const urn = expandId(id.id, this.reqstoolData.initial_model_urn)
         const key = keyFrom(this.workspaceFolder)
 
-        if (type === AnnotationType.requirement) {
+        if (!this.urnExists(urn, id.type)) {
+            return undefined
+        }
+
+        if (id.type === AnnotationType.requirement) {
             return Markdown.fromRequirement(urn, this.reqstoolData, key)
         }
-        if (type === AnnotationType.svc) {
+        if (id.type === AnnotationType.svc) {
             return Markdown.fromSvc(urn, this.reqstoolData, key)
         }
 
         return undefined
     }
 
-    getHtml(urn: string, type: AnnotationType) {
-        urn = expandId(urn, this.reqstoolData.initial_model_urn)
+    getHtml(id: AnnotationId) {
+        const urn = expandId(id.id, this.reqstoolData.initial_model_urn)
         const key = keyFrom(this.workspaceFolder)
 
-        if (type === AnnotationType.requirement) {
+        if (!this.urnExists(urn, id.type)) {
+            return undefined
+        }
+
+        if (id.type === AnnotationType.requirement) {
             return HTML.fromRequirement(urn, this.reqstoolData, key)
         }
-        if (type === AnnotationType.svc) {
+        if (id.type === AnnotationType.svc) {
             return HTML.fromSvc(urn, this.reqstoolData, key)
         }
-        if (type === AnnotationType.mvr) {
+        if (id.type === AnnotationType.mvr) {
             return HTML.fromMvr(urn, this.reqstoolData, key)
         }
 
         return undefined
+    }
+
+    urnExists(urn: string, type: AnnotationType) {
+        switch (type) {
+            case AnnotationType.requirement:
+                return urn in this.reqstoolData.requirements
+            case AnnotationType.svc:
+                return urn in this.reqstoolData.svcs
+            case AnnotationType.mvr:
+                return urn in this.reqstoolData.mvrs
+        }
     }
 }

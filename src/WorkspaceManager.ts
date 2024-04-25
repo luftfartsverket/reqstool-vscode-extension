@@ -21,7 +21,7 @@ class WorkspaceManager {
     remove(workspaceFolder: vscode.WorkspaceFolder) {
         const key = keyFrom(workspaceFolder)
         if (!this.reqsWorkspaces.has(key)) {
-            // Not existing in the first place fullfills the goal of "this shall not be".
+            // Not existing in the first place fulfills the goal of "this shall not be".
             return true
         }
         this.reqsWorkspaces.get(key)?.disposeFileWatcher()

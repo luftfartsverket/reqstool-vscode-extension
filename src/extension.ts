@@ -3,7 +3,7 @@
 import * as vscode from 'vscode'
 import { getReqsDir, scanWorkspaceFolders, setupProject } from './setup'
 import { outputChannel } from './outputChannel'
-import { HoverClickHandlerArgs } from './types'
+import { WorkspaceAnnotation } from './types'
 import { workspaceManager } from './WorkspaceManager'
 import { WebviewProvider } from './WebViewProvider'
 import { AnnotationType } from './enums/AnnotationType'
@@ -32,7 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
     // Register autocomplete snippets
     context.subscriptions.push(registerSnippets())
 
-    // Setup all open workspaces on extension lauch
+    // Setup all open workspaces on extension launch
     scanWorkspaceFolders()
 }
 
@@ -42,12 +42,12 @@ export function deactivate() {
 
 function handleWebViewMessage(message: any) {
     const type = message.type as AnnotationType
-    const html = workspaceManager.getByKey(message.workspaceKey)?.getHtml(message.urn, type)
+    const html = workspaceManager.getByKey(message.workspaceKey)?.getHtml({ id: message.urn, type })
     webView.showWebview(html ?? HTML.fallback(message.urn))
 }
 
-function handleHoverClick(args: HoverClickHandlerArgs) {
-    const html = workspaceManager.getByKey(args.workspaceKey)?.getHtml(args.urn, args.type)
+function handleHoverClick(args: WorkspaceAnnotation) {
+    const html = workspaceManager.getByKey(args.workspaceKey)?.getHtml({ id: args.urn, type: args.type })
     webView.showWebview(html ?? HTML.fallback(args.urn))
 }
 
