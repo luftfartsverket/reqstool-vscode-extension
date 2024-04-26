@@ -77,14 +77,19 @@ type StringArrayMap = {
     [key: string]: string[]
 }
 
-export type HoverClickHandlerArgs = {
+/**
+ * Properties identifying an annotation, id can be just the id, or the urn.
+ */
+export type AnnotationId = {
+    id: string
+    type: AnnotationType
+}
+
+/**
+ * Properties identifying an annotation, including workspace
+ */
+export type WorkspaceAnnotation = {
     urn: string
     type: AnnotationType
     workspaceKey: string
-}
-
-export type AnnotationPosition = {
-    start: number
-    end: number
-    type?: AnnotationType
 }

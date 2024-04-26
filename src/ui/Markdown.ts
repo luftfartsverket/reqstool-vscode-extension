@@ -2,7 +2,7 @@
 
 import { MarkdownString } from 'vscode'
 import { AnnotationType } from '../enums/AnnotationType'
-import { HoverClickHandlerArgs, RequirementsToolOutput } from '../types'
+import { RequirementsToolOutput, WorkspaceAnnotation } from '../types'
 import { ensureStringArray, stringifyRevision } from '../util'
 
 export namespace Markdown {
@@ -61,7 +61,7 @@ export namespace Markdown {
      * The data sent to a vscode command needs to be encoded in a specific way.
      */
     function encodeUrn(urn: string, type: AnnotationType, workspaceKey: string) {
-        const data: HoverClickHandlerArgs = { urn, type, workspaceKey }
+        const data: WorkspaceAnnotation = { urn, type, workspaceKey }
         return encodeURIComponent(JSON.stringify(data))
     }
 }
