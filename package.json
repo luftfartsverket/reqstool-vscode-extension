@@ -2,7 +2,7 @@
     "name": "reqstool-vscode-extension",
     "displayName": "Reqstool",
     "description": "Provides Reqstool support",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "publisher": "LFV",
     "repository": {
         "type": "git",
