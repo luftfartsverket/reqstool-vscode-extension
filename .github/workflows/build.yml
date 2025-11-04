@@ -38,7 +38,7 @@ jobs:
 
       # Upload artifacts for later use
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: dist
           path: "*.vsix"
