@@ -1,6 +1,6 @@
 // Copyright © LFV
 
-import { exec, ExecOptions } from 'child_process'
+import { exec, ExecOptions } from 'node:child_process'
 
 /**
  * This is a wrapper for the nodejs child_process.exec function,
@@ -8,7 +8,7 @@ import { exec, ExecOptions } from 'child_process'
  */
 export function execute(command: string, options: ExecOptions): Promise<string> {
     return new Promise((resolve, reject) => {
-        exec(command, options, (error, stdout) => {
+        exec(command, { ...options, encoding: 'utf8' }, (error, stdout) => {
             if (error) {
                 reject(error)
             } else {

@@ -1,7 +1,7 @@
 // Copyright © LFV
 
 import * as vscode from 'vscode'
-import { ExecException, ExecOptions } from 'child_process'
+import { ExecException, ExecOptions } from 'node:child_process'
 import { execute } from './childProcess'
 import { outputChannel } from './outputChannel'
 import { RequirementsToolOutput } from './types'
